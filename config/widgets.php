@@ -13,12 +13,12 @@ $config['notes_widgets'][] = array(
 	'regions'	=> array('sidebar','content'),
 	'widget'	=> array(
 		'module'	=> 'notes',
-		'name'		=> 'Recent Data',
+		'name'		=> 'Recent Notes',
 		'method'	=> 'run',
-		'path'		=> 'widgets_recent_data',
+		'path'		=> 'widgets_recent_notes',
 		'multiple'	=> 'FALSE',
 		'order'		=> '1',
-		'title'		=> 'Recent Data',
+		'title'		=> 'Notes',
 		'content'	=> ''
 	)
 );

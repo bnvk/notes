@@ -50,16 +50,13 @@ class Notes extends Site_Controller
 		$this->render('wide', 'note');
 	}
 	
-	
+
 	/* Widgets */
-	function widgets_recent_data($widget_data)
+	function widgets_recent_notes($widget_data)
 	{
 		// Load Template Model
-		$this->load->model('data_model');
-	
-		$widget_data['demo_data'] = $this->data_model->get_data_view();
-		
-		$this->load->view('widgets/recent_data', $widget_data);
-	}	
-	
+
+		$this->load->view('widgets/recent_notes', $widget_data);
+	}
+
 }
