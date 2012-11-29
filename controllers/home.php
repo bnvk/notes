@@ -36,7 +36,7 @@ class Home extends Dashboard_Controller
  		// Pick Type of Feed
 		if ($this->uri->total_segments() == 2)
 		{
-	 	    $this->data['page_title'] 		= 'Home';
+	 	    $this->data['page_title'] 		= 'Notes';
 			$timeline 						= $this->notes_library->get_timeline(NULL, 10);
  	    }
  	    elseif ($this->uri->segment(3) == 'friends')
@@ -111,7 +111,7 @@ class Home extends Dashboard_Controller
 				$this->data['item_delete']			= base_url().'api/activity/destroy/id/'.$activity->activity_id;
 
 				// View
-				$timeline_view .= $this->load->view(config_item('dashboard_theme').'/partials/item_timeline.php', $this->data, true);
+				$timeline_view .= $this->load->view('../modules/notes/views/partials/item_timeline.php', $this->data, true);
 	 		}
 	 	}
 	 	else
@@ -125,10 +125,32 @@ class Home extends Dashboard_Controller
 		$this->render();		
 	}
 	
-	function custom()
-	{
-		$this->data['sub_title'] = 'Custom';
 	
-		$this->render();
-	}
+	function item_timeline()
+	{
+		$this->data['item_id']				= '{ITEM_ID}';
+		$this->data['item_type']			= '{ACTIVITY_TYPE}';
+		
+		// Contributor
+		$this->data['item_user_id']			= '{ITEM_USER_ID}';
+		$this->data['item_avatar']			= '{ITEM_AVATAR}';
+		$this->data['item_contributor']		= '{ITEM_CONTRIBUTOR}';
+		$this->data['item_profile']			= base_url().'profiles/{ITEM_PROFILE}';
+		
+		// Activity
+		$this->data['item_content']			= '{ITEM_CONTENT}';
+		$this->data['item_content_id']		= '{ITEM_CONTENT_ID}';
+		$this->data['item_date']			= '{ITEM_DATE}';
+
+ 		// Actions
+		$this->data['item_comment']			= base_url().'comment/item/{ACTIVITY_ID}';
+		$this->data['item_comment_avatar']	= '{ITEM_COMMENT_AVATAR}';
+
+	 	$this->data['item_can_modify']		= '{ITEM_CAN EDIT}';
+		$this->data['item_edit']			= base_url().'home/{ACTIVITY_MODULE}/manage/{ITEM_CONTENT_ID}';
+		$this->data['item_delete']			= base_url().'status/delete/{ACTIVITY_ID}';			
+	
+		$this->load->view('../modules/notes/views/partials/item_timeline', $this->data);
+	}	
+	
 }

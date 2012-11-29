@@ -95,7 +95,7 @@ $(document).ready(function()
 								});
 							}				
 															
-							$.get(base_url + 'home/item_timeline', function(html)
+							$.get(base_url + 'home/notes/item_timeline', function(html)
 							{
 								var newHTML = $.template(html,
 								{
