@@ -48,8 +48,7 @@ class Notes extends Site_Controller
 		$this->data['note'] = $this->social_igniter->get_content($this->uri->segment(2));
 				
 		$this->render('wide', 'note');
-	}
-	
+	}	
 
 	/* Widgets */
 	function widgets_recent_notes($widget_data)

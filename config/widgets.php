@@ -10,7 +10,7 @@
 */
 
 $config['notes_widgets'][] = array(
-	'regions'	=> array('sidebar','content'),
+	'regions'	=> array('sidebar','content', 'wide'),
 	'widget'	=> array(
 		'module'	=> 'notes',
 		'name'		=> 'Recent Notes',

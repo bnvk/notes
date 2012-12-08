@@ -19,8 +19,8 @@ class Home extends Dashboard_Controller
 
 		$this->data['page_title'] = 'Notes';
 	}
-	
-	function index()
+
+	function _remap($method)
 	{
  		if ($this->session->userdata('user_level_id') > config_item('home_view_permission')) redirect(login_redirect());
 
@@ -101,7 +101,6 @@ class Home extends Dashboard_Controller
 					$this->data['item_source']		= ' via <a href="'.prep_url(property_exists($activity,'canonical')&&$activity->canonical?$activity->canonical:$activity->url).'" target="_blank">'.$activity->title.'</a>';
 				}
 
-
 		 		// Actions
 			 	$this->data['item_comment']			= base_url().'comment/item/'.$activity->activity_id;
 			 	$this->data['item_comment_avatar']	= $this->data['logged_image'];
@@ -120,11 +119,12 @@ class Home extends Dashboard_Controller
  		}	
 
 		// Final Output
-		$this->data['timeline_view'] 	= $timeline_view;		
+		$this->data['timeline_view'] 	= $timeline_view;
+		$this->data['timeline_template']= $this->item_timeline();		
 
 		$this->render();		
 	}
-	
+
 	
 	function item_timeline()
 	{
@@ -150,7 +150,7 @@ class Home extends Dashboard_Controller
 		$this->data['item_edit']			= base_url().'home/{ACTIVITY_MODULE}/manage/{ITEM_CONTENT_ID}';
 		$this->data['item_delete']			= base_url().'status/delete/{ACTIVITY_ID}';			
 	
-		$this->load->view('../modules/notes/views/partials/item_timeline', $this->data);
+		return $this->load->view('../modules/notes/views/partials/item_timeline', $this->data, true);
 	}	
 	
 }

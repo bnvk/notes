@@ -11,7 +11,7 @@
 
 
 /* Home */
-$route['home/notes/group/(:any)']		= 'home/index/$1';
+$route['home/notes/group/(:any)']		= 'home/index/$1/$2';
 $route['home/notes/friends']			= 'home/index';
 $route['home/notes/likes']				= 'home/index';
 $route['home/notes']					= 'home/index';

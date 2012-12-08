@@ -94,25 +94,25 @@ $(document).ready(function()
 									}
 								});
 							}				
+
+							console.log($('#item_timeline_template').html());
 															
-							$.get(base_url + 'home/notes/item_timeline', function(html)
+							var newHTML = $.template($('#item_timeline_template').html(),
 							{
-								var newHTML = $.template(html,
-								{
-									'ITEM_ID'			 :result.activity.activity_id,
-									'ITEM_AVATAR'		 :getUserImageSrc(result.data),
-									'ITEM_COMMENT_AVATAR':getUserImageSrc(result.data),
-									'ITEM_PROFILE'		 :result.data.username,
-									'ITEM_CONTRIBUTOR'	 :result.data.name,
-									'ITEM_CONTENT'		 :result.data.content,
-									'ACTIVITY_TYPE'		 :result.activity.type,
-									'ITEM_DATE'			 :'just now',
-									'ACTIVITY_MODULE'	 :result.activity.module,
-									'ITEM_CONTENT_ID'	 :result.data.content_id
-								});
-								
-								$('#feed').prepend(newHTML);
+								'ITEM_ID'			 :result.activity.activity_id,
+								'ITEM_AVATAR'		 :getUserImageSrc(result.data),
+								'ITEM_COMMENT_AVATAR':getUserImageSrc(result.data),
+								'ITEM_PROFILE'		 :result.data.username,
+								'ITEM_CONTRIBUTOR'	 :result.data.name,
+								'ITEM_CONTENT'		 :result.data.content,
+								'ACTIVITY_TYPE'		 :result.activity.type,
+								'ITEM_DATE'			 :'just now',
+								'ACTIVITY_MODULE'	 :result.activity.module,
+								'ITEM_CONTENT_ID'	 :result.data.content_id
 							});
+							
+							$('#feed').prepend(newHTML);
+
 
 							$('#status_update_text').val('');
 					 	}
@@ -179,6 +179,9 @@ $(document).ready(function()
 	});
 
 });
+</script>
+<script type="text/template" id="item_timeline_template">
+<?= $timeline_template ?>
 </script>
 <div class="clear"></div>
 
