@@ -28,7 +28,7 @@ $(document).ready(function()
 	$('#status_update_text').NobleCount('#character_count',
 	{
 		on_negative: 'color_red'
-	});	
+	});
 
 	// Update Status
 	$('#status_update').bind('submit', function(e)
@@ -88,14 +88,11 @@ $(document).ready(function()
 										  	success		: function(social_result)
 										  	{
 										  		// Need to do some notification
-												// console.log(social_result);							
 											}
 										});
 									}
 								});
 							}				
-
-							console.log($('#item_timeline_template').html());
 															
 							var newHTML = $.template($('#item_timeline_template').html(),
 							{
@@ -110,10 +107,8 @@ $(document).ready(function()
 								'ACTIVITY_MODULE'	 :result.activity.module,
 								'ITEM_CONTENT_ID'	 :result.data.content_id
 							});
-							
+
 							$('#feed').prepend(newHTML);
-
-
 							$('#status_update_text').val('');
 					 	}
 					 	else
@@ -175,7 +170,7 @@ $(document).ready(function()
 					// Do Custom Things
 				}
 	    	});
-		});		
+		});
 	});
 
 });
