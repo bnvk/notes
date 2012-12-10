@@ -12,7 +12,10 @@ class Notes extends Site_Controller
 {
     function __construct()
     {
-        parent::__construct();       
+        parent::__construct();
+
+        $this->load->model('notes_model');
+        $this->load->library('notes_library');
 	}
 
 	function _remap($method)
@@ -45,8 +48,13 @@ class Notes extends Site_Controller
 
 	function note() 
 	{		
-		$this->data['note'] = $this->social_igniter->get_content($this->uri->segment(2));
-				
+		$note = $this->social_igniter->get_content($this->uri->segment(2));
+
+		if (!$note) redirect('notes');
+
+		$this->data['note']	= $note;
+		$this->data['note_meta'] = $this->notes_model->get_note_meta($note->content_id, $note->user_id);
+ 				
 		$this->render('wide', 'note');
 	}	
 

@@ -12,8 +12,18 @@
 
 <div class="note_details"><?= format_datetime('MONTH_DAY_YEAR_TIME_ABBR', $note->created_at) ?> via <a href="<?= base_url() ?>"><?= config_item('site_title') ?></a></div>
 
+<div id="note_syndicated">
+	<h4>Reply Via</h4> 
+	<p>
+	<?php foreach($note_meta as $meta): ?>
+		<a href="<?= $this->notes_library->make_social_post_url($meta); ?>" target="_blank"><?= $meta->title ?></a> &nbsp;&nbsp;
+	<?php endforeach; ?>
+	</p>
+</div>
+
+
 <div id="note_share_respond">
-    <h3>Share &amp; Respond</h3>
+    <h4>Share &amp; Respond</h4>
 
     <label for="permalink" class="permalink-label">Permalink</label>
     <input type="text" name="permalink" value="<?= base_url().'notes/'.$note->content_id ?>" class="span4 permalink" onclick="this.focus(); this.select();">

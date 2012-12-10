@@ -306,5 +306,30 @@ class Notes_library
 	
 		return $this->ci->activity_model->get_timeline($where, $limit);
 	}
+	
+	
+	function make_social_post_url($content_data)
+	{
+		$social_post_url = 'asdad';
+	
+		if ($content_data->module == 'twitter')
+		{
+			$social_post_url = $content_data->url.$content_data->connection_username.'/status/'.$content_data->value;
+		}
+		elseif ($content_data->module == 'appnet')
+		{
+			$social_post_url = $content_data->url.$content_data->connection_username.'/post/'.$content_data->value;
+		}
+		elseif ($content_data->module == 'facebook')
+		{
+			$social_post_url = $content_data->url.$content_data->connection_username.'/posts/'.$content_data->value;
+		}
+		else
+		{
+			$social_post_url = base_url(404);
+		}
+
+		return $social_post_url;
+	}
 
 }

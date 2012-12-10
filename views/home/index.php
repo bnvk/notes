@@ -72,7 +72,10 @@ $(document).ready(function()
 							// Social Post
 							var social_post = $('input.social_post');
 							if (social_post.length > 0)
-							{
+							{	
+								// Send Extra Data To Social
+								status_data.push({'name':'content_id','value':result.data.content_id})
+							
 								$.each(social_post, function()
 								{
 									var social_api = $(this).attr('name');
