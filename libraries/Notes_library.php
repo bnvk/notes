@@ -44,7 +44,7 @@ class Notes_library
 	}
 
 
-	/* Timelione Items */
+	/* Timeline Items */
 
     /**
      * Generate Item
