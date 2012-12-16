@@ -8,7 +8,7 @@
 		</span>		
 		<?php if ($item_type): ?><span class="item_type<?= $item_type ?>"></span><?php endif; ?>
 		<div class="clear"></div>
-		<span class="item_meta"><?= $item_date ?><?= $item_source ?></span>
+		<a href="<?= $item_url ?>" class="item_meta"><?= $item_date ?></a>
 		<ul class="item_actions" rel="timeline">
 			<?php if ((config_item('home_comments_allow') == 'TRUE') && ($item_content_id)): ?>
 			<li><a class="item_comment" href="#"><span class="actions action_comment"></span> Comment</a></li>

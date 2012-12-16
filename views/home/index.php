@@ -56,7 +56,7 @@ $(document).ready(function()
 	    		}
 
 				var status_data	= $('#status_update').serializeArray();
-				status_data.push({'name':'category_id','value':group_id},{'name':'module','value':'home'},{'name':'type','value':'status'},{'name':'source','value':'website'},{'name':'comments_allow','value':'Y'});
+				status_data.push({'name':'category_id','value':group_id},{'name':'module','value':'notes'},{'name':'type','value':'status'},{'name':'source','value':'website'},{'name':'comments_allow','value':'Y'});
 		
 				$.oauthAjax(
 				{
