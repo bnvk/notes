@@ -1,5 +1,8 @@
 <style type="text/css">
 /* Dashboard - Notes */
+#notes_extras						{ height: 18px; margin: 0 0 10px 0; color: #999999; font-style: italic; }
+#notes_extras li					{ float: left; margin-right: 15px; }
+
 #feed								{ margin: 0; }
 #feed li							{ float: left; }
 #feed ul.item_actions				{ position: relative; bottom: 8px; right: 5px; }

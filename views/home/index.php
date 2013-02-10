@@ -1,4 +1,8 @@
 <form method="post" id="status_update" action="<?= base_url() ?>api/content/create">
+	<ul id="notes_extras">
+		<li>Shorten URL: <input type="checkbox" name="short_url" value="1" id="short_url" class="settings_post" autocomplete="off"></li>
+		<!-- <li><a href="">Get location <span class="actions action_crosshairs"></span></a></li> -->
+	</ul>
 	<textarea id="status_update_text" placeholder="<?= $home_greeting ?>" name="content"></textarea>	
 	<div id="status_update_options">
 		<?php if ($logged_geo_enabled): ?>
@@ -36,7 +40,7 @@ $(document).ready(function()
 		e.preventDefault();
 		$.validator(
 		{
-			elements : 
+			elements :
 				[{
 					'selector' 	: '#status_update_text',
 					'rule'		: 'require', 
@@ -52,12 +56,22 @@ $(document).ready(function()
 	    		}
 	    		else
 	    		{
-	    			var group_id = 0;    		
+	    			var group_id = 0;
 	    		}
 
+	    		// Basic Note Data
 				var status_data	= $('#status_update').serializeArray();
-				status_data.push({'name':'category_id','value':group_id},{'name':'module','value':'notes'},{'name':'type','value':'status'},{'name':'source','value':'website'},{'name':'comments_allow','value':'Y'});
-		
+				status_data.push(
+					{'name':'category_id','value':group_id},
+					{'name':'module','value':'notes'},
+					{'name':'type','value':'status'},
+					{'name':'source','value':'website'},
+					{'name':'comments_allow','value':'Y'},
+					{'name':'status','value':'P'});
+
+				// Add Settings (short_url, geo, etc...)
+				addLocalSettingsPost(status_data);
+
 				$.oauthAjax(
 				{
 					oauth 		: user_data,
@@ -160,7 +174,7 @@ $(document).ready(function()
 	$('#social_connections_add').bind('click', function(e)
 	{
 		e.preventDefault();
-		$.get(base_url + 'dialogs/add_connections',function(partial_html)
+		$.get(base_url + 'dialogs/add_connections', function(partial_html)
 		{
 			$('<div />').html(partial_html).dialog(
 			{
