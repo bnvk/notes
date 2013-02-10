@@ -141,6 +141,7 @@ class Home extends Dashboard_Controller
 		$this->data['item_content']			= '{ITEM_CONTENT}';
 		$this->data['item_content_id']		= '{ITEM_CONTENT_ID}';
 		$this->data['item_date']			= '{ITEM_DATE}';
+		$this->data['item_url']				= '{ITEM_URL}';
 
  		// Actions
 		$this->data['item_comment']			= base_url().'comment/item/{ACTIVITY_ID}';

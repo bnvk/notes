@@ -99,7 +99,7 @@ $(document).ready(function()
 															
 							var newHTML = $.template($('#item_timeline_template').html(),
 							{
-								'ITEM_ID'			 :result.activity.activity_id,
+								'ITEM_ID'			 :result.activity.content_id,
 								'ITEM_AVATAR'		 :getUserImageSrc(result.data),
 								'ITEM_COMMENT_AVATAR':getUserImageSrc(result.data),
 								'ITEM_PROFILE'		 :result.data.username,
@@ -108,7 +108,8 @@ $(document).ready(function()
 								'ACTIVITY_TYPE'		 :result.activity.type,
 								'ITEM_DATE'			 :'just now',
 								'ACTIVITY_MODULE'	 :result.activity.module,
-								'ITEM_CONTENT_ID'	 :result.data.content_id
+								'ITEM_CONTENT_ID'	 :result.data.content_id,
+								'ITEM_URL'			 : base_url + 'notes/' + result.data.content_id
 							});
 
 							$('#feed').prepend(newHTML);
