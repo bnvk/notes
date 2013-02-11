@@ -136,7 +136,11 @@ $(document).ready(function()
 							{	
 								// Send Extra Data To Social
 								status_data.push({'name':'content_id','value':result.data.content_id});
-								status_data.push({'name':'short_url','value':result.short_url});
+
+								if (result.short_url !== undefined)
+								{
+									status_data.push({'name':'short_url','value':result.short_url});
+								}
 							
 								$.each(social_post, function()
 								{
