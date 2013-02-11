@@ -152,6 +152,6 @@ class Home extends Dashboard_Controller
 		$this->data['item_delete']			= base_url().'status/delete/{ACTIVITY_ID}';			
 	
 		return $this->load->view('../modules/notes/views/partials/item_timeline', $this->data, true);
-	}	
+	}
 	
 }

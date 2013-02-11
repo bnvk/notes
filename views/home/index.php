@@ -135,7 +135,8 @@ $(document).ready(function()
 							if (social_post.length > 0)
 							{	
 								// Send Extra Data To Social
-								status_data.push({'name':'content_id','value':result.data.content_id})
+								status_data.push({'name':'content_id','value':result.data.content_id});
+								status_data.push({'name':'short_url','value':result.short_url});
 							
 								$.each(social_post, function()
 								{
