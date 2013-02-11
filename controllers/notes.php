@@ -52,9 +52,13 @@ class Notes extends Site_Controller
 
 		if (!$note) redirect('notes');
 
-		$this->data['note']	= $note;
-		$this->data['note_meta'] = $this->notes_model->get_note_meta($note->content_id, $note->user_id);
- 				
+		$note_social = $this->notes_model->get_note_social_post($note->content_id, $note->user_id);
+		$note_extras = $this->notes_model->get_note_extras($note->content_id, $note->user_id);
+
+		$this->data['note']			= $note;
+ 		$this->data['note_social']	= $note_social; 		
+ 		$this->data['short_url']	= $this->social_igniter->find_meta_content_value('short_url', $note_extras);
+
 		$this->render('wide', 'note');
 	}	
 

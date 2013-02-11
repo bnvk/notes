@@ -7,7 +7,7 @@ class Notes_model extends CI_Model {
         parent::__construct();
     }
     
-    function get_note_meta($content_id, $user_id)
+    function get_note_social_post($content_id, $user_id)
     {
  		$this->db->select('*');
  		$this->db->from('content_meta');
@@ -17,6 +17,16 @@ class Notes_model extends CI_Model {
  		$this->db->where('connections.user_id', $user_id);
  		$result = $this->db->get();	
  		return $result->result();     
+    }
+
+    function get_note_extras($content_id, $user_id)
+    {
+ 		$this->db->select('*');
+ 		$this->db->from('content_meta');
+ 		$this->db->join('sites', 'sites.site_id = content_meta.site_id');		    
+ 		$this->db->where('content_meta.content_id', $content_id);
+ 		$result = $this->db->get();	
+ 		return $result->result();
     }
 
 }

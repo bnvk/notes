@@ -15,8 +15,8 @@
 <div id="note_syndicated">
 	<h4>Reply Via</h4> 
 	<p>
-	<?php foreach($note_meta as $meta): ?>
-		<a href="<?= $this->notes_library->make_social_post_url($meta); ?>" target="_blank"><?= $meta->title ?></a> &nbsp;&nbsp;
+	<?php foreach($note_social as $social): ?>
+		<a href="<?= $this->notes_library->make_social_post_url($social); ?>" target="_blank"><?= $social->title ?></a> &nbsp;&nbsp;
 	<?php endforeach; ?>
 	</p>
 </div>
@@ -27,9 +27,11 @@
 
     <label for="permalink" class="permalink-label">Permalink</label>
     <input type="text" name="permalink" value="<?= base_url().'notes/'.$note->content_id ?>" class="span4 permalink" onclick="this.focus(); this.select();">
-    <label for="shortlink" class="permalink-label">Shortlink</label>
-    <input type="text" name="shortlink" value="<?= base_url().'notes/'.$note->content_id ?>" class="span4 shortlink" onclick="this.focus(); this.select();">
 
+    <?php if ($short_url): ?>
+    <label for="shortlink" class="permalink-label">Shortlink</label>
+    <input type="text" name="shortlink" value="<?= $short_url ?>" class="span4 shortlink" onclick="this.focus(); this.select();">
+    <?php endif; ?>
     <div id="note_share_actions">
 		<table border="0" cellpadding="4">
 		<tr>

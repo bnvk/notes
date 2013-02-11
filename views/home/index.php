@@ -67,7 +67,7 @@ $(document).ready(function()
 					{'name':'type','value':'status'},
 					{'name':'source','value':'website'},
 					{'name':'comments_allow','value':'Y'},
-					{'name':'status','value':'P'});
+					{'name':'status','value':'publish'});
 
 				// Add Settings (short_url, geo, etc...)
 				addLocalSettingsPost(status_data);

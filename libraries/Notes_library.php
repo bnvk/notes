@@ -310,7 +310,7 @@ class Notes_library
 	
 	function make_social_post_url($content_data)
 	{
-		$social_post_url = 'asdad';
+		$social_post_url = '';
 	
 		if ($content_data->module == 'twitter')
 		{
