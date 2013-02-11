@@ -1,6 +1,7 @@
 <form method="post" id="status_update" action="<?= base_url() ?>api/content/create">
 	<ul id="notes_extras">
-		<li>Shorten URL: <input type="checkbox" name="short_url" value="1" id="short_url" class="settings_post" autocomplete="off"></li>
+		<li><a href="#" id="notes_add_attachments"><span class="actions action_link"></span> Add Attachments</a></li>
+		<li><input type="checkbox" name="short_url" value="1" id="short_url" class="settings_post" autocomplete="off"> Shorten URL</li>
 		<!-- <li><a href="">Get location <span class="actions action_crosshairs"></span></a></li> -->
 	</ul>
 	<textarea id="status_update_text" placeholder="<?= $home_greeting ?>" name="content"></textarea>	
@@ -9,18 +10,39 @@
 		<div id="status_update_geo">
 			<a href="#" class="find_location" id="status_find_location"><span>Get Location</span></a>
 		</div>
-		<?php endif; ?>
+		<?php endif; ?>		
 		<?= $social_post ?>
+		<ul id="notes_attachments"></ul>
 		<div class="clear"></div>
 	</div>
 	<div id="status_update_post">
 		<input type="submit" name="post" id="status_post" value="Share" />
 		<span id="character_count"></span>
 	</div>
+	<div class="clear"></div>
+
 	<input type="hidden" name="access" id="access" value="E" />
 	<input type="hidden" name="geo_lat" id="geo_lat" value="" />
 	<input type="hidden" name="geo_long" id="geo_long" value="" />
 </form>
+<div class="clear"></div>
+
+<ol id="feed">
+	<?= $timeline_view ?>
+</ol>
+<div class="clear"></div>
+
+<script type="text/template" id="item_timeline_template">
+	<?= $timeline_template ?>
+</script>
+
+<script type="text/template" id="notes_add_attachments_template">
+	<textarea id="notes_add_attachment_textarea" placeholder='<img src="http://www.website.com">' name="attachment"></textarea>	
+</script>
+
+<script type="text/template" id="notes_attachment_template">
+	<li>Attachment {title} <input type="hidden" class="note_attachment" value='{attachment}' name="attachments[]"></li>
+</script>
 
 <script type="text/javascript">
 $(document).ready(function()
@@ -72,6 +94,7 @@ $(document).ready(function()
 				// Add Settings (short_url, geo, etc...)
 				addLocalSettingsPost(status_data);
 
+				// Create Note
 				$.oauthAjax(
 				{
 					oauth 		: user_data,
@@ -83,6 +106,30 @@ $(document).ready(function()
 				  	{		  		  	
 						if (result.status == 'success')
 						{
+							// Add Attachments
+							if ($('#notes_attachments li').length)
+							{
+								$.each($('#notes_attachments li input'), function()
+								{
+									var note_data = [{'name':'meta','value':'attachment'},{'name':'value','value':$(this).val()}];
+
+									$.oauthAjax(
+									{
+										oauth 		: user_data,
+										url			: base_url + 'api/content_meta/create/id/' + result.data.content_id,
+										type		: 'POST',
+										dataType	: 'json',
+										data		: note_data,
+									  	success		: function(result)
+									  	{	
+											console.log(result);
+										}
+									});									
+								});
+								
+								$('#notes_attachments').html('');
+							}
+						
 							// Social Post
 							var social_post = $('input.social_post');
 							if (social_post.length > 0)
@@ -191,15 +238,46 @@ $(document).ready(function()
 		});
 	});
 
+
+	// Add Connections
+	$('#notes_add_attachments').bind('click', function(e)
+	{
+		e.preventDefault();
+		var add_attachment_html = $.template($('#notes_add_attachments_template').html());
+
+		$('<div />').html(add_attachment_html).dialog(
+		{
+			width	: 375,
+			modal	: true,
+			close	: function(){$(this).remove()},
+			title	: 'Paste HTML Attachment',
+			create	: function()
+			{
+				$parent_dialog = $(this);
+			},
+			buttons	:
+			{
+				'Attach':function()
+				{
+					var attachment_data = { 
+						title: $('#notes_attachments li').length + 1,
+						attachment: $('#notes_add_attachment_textarea').val()
+					};
+
+					var attachment_html = $.template($('#notes_attachment_template').html(), attachment_data);
+
+					$('#notes_attachments').append(attachment_html);
+
+					$(this).dialog('close');			
+				},
+				'Cancel':function()
+				{
+					$(this).dialog('close');
+				}				
+			}
+		});
+	});
+
+
 });
 </script>
-<script type="text/template" id="item_timeline_template">
-<?= $timeline_template ?>
-</script>
-<div class="clear"></div>
-
-<ol id="feed">
-	<?= $timeline_view ?>
-</ol>
-
-<div class="clear"></div>

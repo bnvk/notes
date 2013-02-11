@@ -12,7 +12,7 @@
 
 <div id="note_attachments">
 	<?php foreach ($note_extras as $extra): if ($extra->meta == 'attachment'): ?>
-		<div class="note_attachment"><?= $extra->value ?></div>
+		<div class="note_attachment"><?= str_replace(array('&lt;', '&gt;'), array('<', '>'), $extra->value) ?></div>
 	<?php endif; endforeach; ?>
 </div>
 

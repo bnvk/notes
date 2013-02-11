@@ -1,7 +1,14 @@
 <style type="text/css">
 /* Dashboard - Notes */
 #notes_extras						{ height: 18px; margin: 0 0 10px 0; color: #999999; font-style: italic; }
-#notes_extras li					{ float: left; margin-right: 15px; }
+#notes_extras li					{ float: left; margin-right: 25px; }
+#notes_extras a						{ color: #999999; }
+#notes_extras a span.actions		{ position: relative; top: -2px; left: 0; }
+
+#notes_add_attachment_textarea		{ width: 350px; height: 75px; margin-bottom: 25px; }
+#notes_attachments					{ margin: 25px 0 0 10px; }
+#notes_attachments li 				{ margin: 0 0 10px 0; color: #999999; font-style: italic; }
+
 
 #feed								{ margin: 0; }
 #feed li							{ float: left; }
