@@ -18,15 +18,5 @@ class Notes_model extends CI_Model {
  		$result = $this->db->get();	
  		return $result->result();     
     }
-
-    function get_note_extras($content_id, $user_id)
-    {
- 		$this->db->select('*');
- 		$this->db->from('content_meta');
- 		$this->db->join('sites', 'sites.site_id = content_meta.site_id');		    
- 		$this->db->where('content_meta.content_id', $content_id);
- 		$result = $this->db->get();	
- 		return $result->result();
-    }
-
+    
 }
