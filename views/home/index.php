@@ -134,14 +134,17 @@ $(document).ready(function()
 							var social_post = $('input.social_post');
 							if (social_post.length > 0)
 							{	
-								// Send Extra Data To Social
+								// Extra Data To Social
 								status_data.push({'name':'content_id','value':result.data.content_id});
+								status_data.push({'name':'long_url','value':base_url + 'notes/' + result.data.content_id});
 
+								// If short_url exists
 								if (result.short_url !== undefined)
 								{
 									status_data.push({'name':'short_url','value':result.short_url});
 								}
-							
+								
+								// Do Social Post (Twitter, Facebook, App.net, etc...)
 								$.each(social_post, function()
 								{
 									var social_api = $(this).attr('name');
@@ -156,7 +159,7 @@ $(document).ready(function()
 											data		: status_data,
 										  	success		: function(social_result)
 										  	{
-										  		// Need to do some notification
+										  		// Need to do some UI notification
 											}
 										});
 									}

@@ -22,7 +22,7 @@ class Home extends Dashboard_Controller
 
 	function _remap($method)
 	{
- 		if ($this->session->userdata('user_level_id') > config_item('home_view_permission')) redirect(login_redirect());
+ 		if ($this->session->userdata('user_level_id') > config_item('notes_view_permission')) redirect(login_redirect());
 
  		$timeline		= NULL;
 		$timeline_view	= NULL;

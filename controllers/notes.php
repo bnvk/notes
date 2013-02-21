@@ -60,6 +60,9 @@ class Notes extends Site_Controller
  		$this->data['note_extras']	= $note_extras;
  		$this->data['short_url']	= $this->social_igniter->find_meta_content_value('short_url', $note_extras);
 
+ 		// Core Values
+ 		$this->data['site_image']	= 'find_image_in_attachments';
+
 		$this->render('wide', 'note');
 	}	
 
