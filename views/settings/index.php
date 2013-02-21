@@ -45,6 +45,10 @@
 	<input type="text" size="4" name="description_length" value="<?= $settings['notes']['description_length'] ?>" /> characters
 	</p>
 
+	<p>Social Buttons<br>
+	<?= form_dropdown('social_buttons', config_item('yes_or_no'), $settings['notes']['social_buttons']) ?>
+	</p>
+
 </div>
 
 <span class="item_separator"></span>

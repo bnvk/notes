@@ -24,3 +24,5 @@ $config['notes_settings']['share']				= 'TRUE';
 $config['notes_settings']['like']				= 'TRUE';
 $config['notes_settings']['comments_allow']		= 'TRUE';
 $config['notes_settings']['comments_per_page']	= '2';
+
+$config['notes_settings']['social_buttons']		= 'FALSE';
