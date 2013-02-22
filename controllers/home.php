@@ -93,7 +93,7 @@ class Home extends Dashboard_Controller
 				// Activity
 				$this->data['item_content']			= $this->notes_library->render_item($activity);
 				$this->data['item_content_id']		= $activity->content_id;
-				$this->data['item_date']			= format_datetime(config_item('home_date_style'), $activity->created_at);			
+				$this->data['item_date']			= format_datetime(config_item('notes_date_style'), $activity->created_at);			
 				$this->data['item_url']				= base_url().'notes/'.$activity->content_id;
 		
 				if ($activity->site_id != config_item('site_id'))

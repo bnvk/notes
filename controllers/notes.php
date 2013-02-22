@@ -14,6 +14,7 @@ class Notes extends Site_Controller
     {
         parent::__construct();
 
+        $this->load->helper('../modules/notes/helpers/notes_helper');
         $this->load->model('notes_model');
         $this->load->library('notes_library');
 	}
@@ -23,7 +24,7 @@ class Notes extends Site_Controller
 		if (($this->uri->segment(2) == 'view') AND ($this->uri->segment(3)))
 		{
 			redirect('/notes/'.$this->uri->segment(3));
-		}
+		}	
 		elseif (($this->uri->segment(2) == 'view') AND (!$this->uri->segment(3)))
 		{
 			redirect('/notes');
@@ -61,8 +62,11 @@ class Notes extends Site_Controller
  		$this->data['short_url']	= $this->social_igniter->find_meta_content_value('short_url', $note_extras);
 
  		// Core Values
- 		$this->data['site_image']		= find_image_in_note($note, $note_extras);
- 		$this->data['site_description']	= truncator($note->content, 25);
+ 		$default_image					= $this->data['this_module_assets'].'notes_32.png';
+ 		$meta_description				= truncator($note->content, 25);
+ 		$this->data['site_image']		= find_image_in_note($note->content, $note_extras, $default_image);
+ 		$this->data['site_description']	= $meta_description;
+ 		$this->data['page_title']		= $meta_description;
 
 		$this->render('wide', 'note');
 	}	
