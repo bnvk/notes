@@ -7,7 +7,7 @@
 </div>
 
 <div id="note">
-	<?= $note->content ?>
+	<?= item_linkify($note->content, 'twitter') ?>
 </div>
 
 <div id="note_attachments">

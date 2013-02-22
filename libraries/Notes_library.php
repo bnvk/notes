@@ -23,7 +23,7 @@ class Notes_library
 	/* Groups Dropdown */
 	function make_group_dropdown($user_id, $user_level_id, $add_label=FALSE)
 	{
-		$categories_query 		= $this->ci->social_tools->get_categories_view_multiple(array('categories.module' => 'home'));
+		$categories_query 		= $this->ci->social_tools->get_categories_view_multiple(array('categories.module' => 'notes'));
 		$this->view_categories 	= array('all' => 'All', 'friends' => 'Friends');
 		$categories 			= $this->ci->social_tools->render_categories_children($categories_query, 0);
 				
