@@ -135,8 +135,9 @@ $(document).ready(function()
 							if (social_post.length > 0)
 							{	
 								// Extra Data To Social
-								status_data.push({'name':'content_id','value':result.data.content_id});
-								status_data.push({'name':'long_url','value':base_url + 'notes/' + result.data.content_id});
+								status_data.push({'name':'content_id', 'value':result.data.content_id});
+								status_data.push({'name':'author', 'value': result.data.name });
+								status_data.push({'name':'long_url', 'value':base_url + 'notes/' + result.data.content_id});
 
 								// If short_url exists
 								if (result.short_url !== undefined)

@@ -10,8 +10,10 @@
  * Description: This is a helper file for Notes
  */
  
-function my_custom_function($data)
+function find_image_in_note($note, $attachments)
 {
+	
+
  	$result = 'Social-Igniter is a '.$data.' web application!';
 	return $result;
 }
