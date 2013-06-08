@@ -1,8 +1,22 @@
-<div id="note_creator">
-	<img class="note_creator_avatar" src="<?= $this->social_igniter->profile_image($note->user_id, $note->image, $note->gravatar, 'medium'); ?>">
+<?php if ($response): ?>
+<div id="note-reply" class="note-reply-context p-in-reply-to h-entry">
+	<img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($response_user->user_id, $response_user->image, $response_user->gravatar, 'medium'); ?>" alt="">						
 	<div class="note_creator_info">
-		<h2><?= $note->name ?></h2>
-		<a href="<?= base_url().'people/'.$note->username ?>">@<?= $note->username ?></a> on <?= format_datetime('MONTH_DAY_YEAR_ABBR', $note->created_at) ?></a>
+	<a class="u-url p-name" href="<?= base_url().'people/'.$response_user->username ?>"><h2><?= $response_user->name ?></h2></a>
+	<span class="p-summary p-name p-content">
+		Posted <a href="<?= $response->url ?>" target="_blank"><?= $response->title ?></a>
+	</span>
+	</div>
+	<div class="clear"></div>
+</div>
+<?php endif; ?>
+
+<div id="note_creator" class="h-card">
+	<img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($note->user_id, $note->image, $note->gravatar, 'medium'); ?>">
+	<div class="note_creator_info">
+		<a href="<?= base_url().'people/'.$note->username ?>"><h2 class="p-name fn"><?= $note->name ?></h2></a>
+		<?php if ($response): ?>Replied<?php else: ?>Posted<?php endif; ?> at
+		<time class="dt-published published dt-updated updated" datetime="<?= $note->created_at ?>"><?= format_datetime('MONTH_DAY_YEAR_ABBR', $note->created_at) ?></time> 
 	</div>
 </div>
 
@@ -12,16 +26,18 @@
 
 <div id="note_attachments">
 	<?php foreach ($note_extras as $extra): if ($extra->meta == 'attachment'): ?>
-		<div class="note_attachment"><?= str_replace(array('&lt;', '&gt;'), array('<', '>'), $extra->value) ?></div>
+		<div class="note_attachment"><?= nl2br(str_replace(array('&lt;', '&gt;'), array('<', '>'), $extra->value)) ?></div>
 	<?php endif; endforeach; ?>
 </div>
+
+
 
 <?php if ($note_social): ?>
 <div class="note_respond">
 	<h4>Reply Via</h4> 
 	<ul>
 	<?php foreach($note_social as $social): ?>
-		<li><a href="<?= $this->notes_library->make_social_post_url($social); ?>" target="_blank"><?= $social->title ?></a> </li>
+		<li><a href="<?= $this->notes_library->make_social_post_url($social); ?>" rel="syndication" class="u-syndication" target="_blank"><?= $social->title ?></a> </li>
 	<?php endforeach; ?>
 	</ul>
 	<div class="clear"></div>
@@ -30,15 +46,12 @@
 
 <div class="note_respond">
     <h4>Share &amp; Respond</h4>
-
     <?php if ($short_url): ?>
     <label for="shortlink" class="permalink-label">Shortlink</label>
     <input type="text" name="shortlink" value="<?= $short_url ?>" class="span4 shortlink" onclick="this.focus(); this.select();">
     <?php endif; ?>
-
     <label for="permalink" class="permalink-label">Permalink</label>
     <input type="text" name="permalink" value="<?= base_url().'notes/'.$note->content_id ?>" class="span4 permalink" onclick="this.focus(); this.select();">
-
     <?php if (config_item('notes_social_buttons') == 'TRUE'): ?>
 	<table border="0" cellpadding="4">
 	<tr>

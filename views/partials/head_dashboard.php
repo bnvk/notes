@@ -1,5 +1,12 @@
 <style type="text/css">
 /* Dashboard - Notes */
+#status_update_text 		{ width: 615px; min-height: 45px; overflow: hidden; font-size: 14px; line-height: 18px; padding: 12px; }
+#status_update_options		{ width: 400px; height: 50px; float: left; margin: 15px 0 0 0; }
+#status_update_geo			{ width: 130px; float: left; }
+
+#status_find_place			{ width: 24px; height: 24px; display: block; margin: 0; background: url(icons/places_gray_24.png) 0 0 no-repeat; position: relative; top: -6px; left: 0; } 
+#status_find_place span		{ width: 110px; display: block; position: relative; top: 4px; left: 30px; }
+
 #notes_extras						{ height: 18px; margin: 0 0 10px 0; color: #999999; font-style: italic; }
 #notes_extras li					{ float: left; margin-right: 25px; }
 #notes_extras a						{ color: #999999; }

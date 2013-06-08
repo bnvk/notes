@@ -4,7 +4,7 @@
 		<li><input type="checkbox" name="short_url" value="1" id="short_url" class="settings_post" autocomplete="off"> Shorten URL</li>
 		<!-- <li><a href="">Get location <span class="actions action_crosshairs"></span></a></li> -->
 	</ul>
-	<textarea id="status_update_text" placeholder="<?= $home_greeting ?>" name="content"></textarea>	
+	<textarea id="status_update_text" onkeyup="this.style.height='18px'; this.style.height = this.scrollHeight + 6 + 'px';" placeholder="<?= $home_greeting ?>" name="content"></textarea>	
 	<div id="status_update_options">
 		<?php if ($logged_geo_enabled): ?>
 		<div id="status_update_geo">
@@ -49,6 +49,7 @@ $(document).ready(function()
 {
 	// Geo
 	geo_get();
+
 
 	// Character Counter
 	$('#status_update_text').NobleCount('#character_count',

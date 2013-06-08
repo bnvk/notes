@@ -61,6 +61,17 @@ class Notes extends Site_Controller
  		$this->data['note_extras']	= $note_extras;
  		$this->data['short_url']	= $this->social_igniter->find_meta_content_value('short_url', $note_extras);
 
+ 		// Is Response
+ 		$response = $this->social_igniter->find_meta_content_value('response', $note_extras);
+
+ 		if ($response):
+ 			$response = json_decode($response);
+ 			$this->data['response_user'] = $this->social_auth->get_user('user_id', $response->user_id); 
+ 		endif;
+ 		
+ 		$this->data['response']	= $response;
+
+
  		// Core Values
  		$default_image					= $this->data['this_module_assets'].'notes_32.png';
  		$meta_description				= truncator($note->content, 25);
