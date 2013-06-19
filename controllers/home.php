@@ -122,7 +122,7 @@ class Home extends Dashboard_Controller
 		$this->data['timeline_view'] 	= $timeline_view;
 		$this->data['timeline_template']= $this->item_timeline();		
 
-		$this->render();		
+		$this->render('dashboard_wide');		
 	}
 
 	

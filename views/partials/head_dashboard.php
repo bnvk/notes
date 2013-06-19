@@ -1,5 +1,7 @@
 <style type="text/css">
 /* Dashboard - Notes */
+
+#status_update				{ width: 645px; }
 #status_update_text 		{ width: 615px; min-height: 45px; overflow: hidden; font-size: 14px; line-height: 18px; padding: 12px; }
 #status_update_options		{ width: 400px; height: 50px; float: left; margin: 15px 0 0 0; }
 #status_update_geo			{ width: 130px; float: left; }
