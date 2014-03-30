@@ -2,6 +2,7 @@
 	<ul id="notes_extras">
 		<li><a href="#" id="notes_add_attachments"><span class="actions action_link"></span> Add Attachments</a></li>
 		<li><input type="checkbox" name="short_url" value="1" id="short_url" class="settings_post" autocomplete="off"> Shorten URL</li>
+		<li><input type="input" name="reply_url" value="" id="status_reply_url"> Reply URL</li>
 		<!-- <li><a href="">Get location <span class="actions action_crosshairs"></span></a></li> -->
 	</ul>
 	<textarea id="status_update_text" onkeyup="this.style.height='18px'; this.style.height = this.scrollHeight + 6 + 'px';" placeholder="<?= $home_greeting ?>" name="content"></textarea>	
