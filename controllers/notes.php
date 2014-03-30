@@ -1,42 +1,35 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
-* Name:			Social Igniter : Notes : Controller
-* Author: 		Localhost
-* 		  		hi@brennannovak.com
+* Name:		 Social Igniter : Notes : Controller
+* Author:  Brennan Novak
+* 		  	 hi@brennannovak.com
 * 
-* Project:		http://social-igniter.com
+* Project: http://social-igniter.com
 * 
 * Description: This file is for the public Notes Controller class
 */
 class Notes extends Site_Controller
 {
-    function __construct()
-    {
-        parent::__construct();
+  function __construct()
+  {
+    parent::__construct();
 
-        $this->load->helper('../modules/notes/helpers/notes_helper');
-        $this->load->model('notes_model');
-        $this->load->library('notes_library');
+    $this->load->helper('../modules/notes/helpers/notes_helper');
+    $this->load->model('notes_model');
+    $this->load->library('notes_library');
 	}
 
 	function _remap($method)
-	{	
-		if (($this->uri->segment(2) == 'view') AND ($this->uri->segment(3)))
-		{
+	{
+		if (($this->uri->segment(2) == 'view') AND ($this->uri->segment(3))):
 			redirect('/notes/'.$this->uri->segment(3));
-		}	
-		elseif (($this->uri->segment(2) == 'view') AND (!$this->uri->segment(3)))
-		{
+		elseif (($this->uri->segment(2) == 'view') AND (!$this->uri->segment(3))):
 			redirect('/notes');
-		}
-		elseif ($this->uri->segment(2))
-		{		
-			$this->note();
-		}
-		else
-		{
+		elseif ($this->uri->segment(2)):
+			$this->note();		
+		else:		
 			$this->index();
-		}	
+		endif;	
 	}
 
 	function index()
@@ -85,8 +78,6 @@ class Notes extends Site_Controller
 	/* Widgets */
 	function widgets_recent_notes($widget_data)
 	{
-		// Load Template Model
-
 		$this->load->view('widgets/recent_notes', $widget_data);
 	}
 
