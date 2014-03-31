@@ -40,30 +40,28 @@ class Notes extends Site_Controller
 		$this->render();
 	}
 
-	function note() 
-	{		
+	function note()
+	{
 		$note = $this->social_igniter->get_content($this->uri->segment(2));
 
 		if (!$note) redirect('notes');
 
+ 		// Is Response
+ 		if ($note->parent_id):
+    // 		$response = $this->social_igniter->find_meta_content_value('response', $note_extras);
+ 	//		$response = json_decode($response);
+            $this->data['response'] = $this->social_igniter->get_content($note->parent_id);
+            $this->data['response_site'] = $this->social_igniter->get_site($this->data['response']->site_id);
+ 			$this->data['response_user'] = $this->social_auth->get_user('user_id', $this->data['response']->user_id);        
+ 		endif;
+
 		$note_social = $this->notes_model->get_note_social_post($note->content_id, $note->user_id);
 		$note_extras = $this->social_igniter->get_meta_content($note->content_id);
-
+ 		
 		$this->data['note']			= $note;
- 		$this->data['note_social']	= $note_social; 		
+ 		$this->data['note_social']	= $note_social;
  		$this->data['note_extras']	= $note_extras;
  		$this->data['short_url']	= $this->social_igniter->find_meta_content_value('short_url', $note_extras);
-
- 		// Is Response
- 		$response = $this->social_igniter->find_meta_content_value('response', $note_extras);
-
- 		if ($response):
- 			$response = json_decode($response);
- 			$this->data['response_user'] = $this->social_auth->get_user('user_id', $response->user_id); 
- 		endif;
- 		
- 		$this->data['response']	= $response;
-
 
  		// Core Values
  		$default_image					= $this->data['this_module_assets'].'notes_32.png';
@@ -73,7 +71,7 @@ class Notes extends Site_Controller
  		$this->data['page_title']		= $meta_description;
 
 		$this->render('wide', 'note');
-	}	
+	}
 
 	/* Widgets */
 	function widgets_recent_notes($widget_data)

@@ -13,28 +13,38 @@ class Api extends Oauth_Controller
     function __construct()
     {
         parent::__construct();
-	}
+    }
 
     /* Install App */
-	function install_get()
-	{
-		// Load
-		$this->load->library('installer');
-		$this->load->config('install');
+  	function install_get()
+  	{
+  		// Load
+  		$this->load->library('installer');
+  		$this->load->config('install');
+  
+  		// Settings & Create Folders
+  		$settings = $this->installer->install_settings('notes', config_item('notes_settings'));
+  
+  		if ($settings == TRUE)
+  		{
+              $message = array('status' => 'success', 'message' => 'Yay, the Notes App was installed');
+          }
+          else
+          {
+              $message = array('status' => 'error', 'message' => 'Dang Notes App could not be installed');
+          }		
+  		
+  		$this->response($message, 200);
+  	}
+	
 
-		// Settings & Create Folders
-		$settings = $this->installer->install_settings('notes', config_item('notes_settings'));
-
-		if ($settings == TRUE)
-		{
-            $message = array('status' => 'success', 'message' => 'Yay, the Notes App was installed');
-        }
-        else
-        {
-            $message = array('status' => 'error', 'message' => 'Dang Notes App could not be installed');
-        }		
-		
-		$this->response($message, 200);
-	} 
+    function test_get()
+    {
+        $client = new IndieWeb\MentionClient('http://django.bnvk.me/notes/19');
+        $client->debug(true);
+        $sent = $client->sendSupportedMentions();
+  
+        echo "Sent $sent mentions\n";
+    }
 
 }

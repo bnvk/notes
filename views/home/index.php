@@ -21,7 +21,6 @@
 		<span id="character_count"></span>
 	</div>
 	<div class="clear"></div>
-
 	<input type="hidden" name="access" id="access" value="E" />
 	<input type="hidden" name="geo_lat" id="geo_lat" value="" />
 	<input type="hidden" name="geo_long" id="geo_long" value="" />

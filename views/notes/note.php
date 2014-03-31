@@ -1,11 +1,14 @@
 <article class="h-as-note h-entry hentry note-single">
-  <?php if ($response): ?>
-  <!-- Replay Contexts -->
+  <?php if ($note->parent_id): ?>  
+  <!-- Indie Web Reply Contexts | http://indiewebcamp.com/reply-context -->
   <div id="note-reply" class="note-reply-context p-in-reply-to h-cite">
-  	<img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($response_user->user_id, $response_user->image, $response_user->gravatar, 'medium'); ?>" alt="">						
-  	<div class="note_creator_info">
-    	<a class="p-summary p-name p-content u-url" href="<?= $response->url ?>"><h2><?= $response->title ?></h2></a>
-  	  <span>Posted by <a class="p-publisher h-card" href="<?= base_url().'people/'.$response_user->username ?>" target="_blank"><?= $response_user->name ?></a></span> on <time class="dt-published published" datetime="<?= $note->created_at ?>"><?= format_datetime('MONTH_DAY_YEAR_ABBR', $note->created_at) ?></time>
+    <a href="<?= $response_site->url ?>" target="_blank"><img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($response_user->user_id, $response_user->image, $response_user->gravatar, 'medium'); ?>" alt=""></a>		
+  	<div class="note_creator_info">    	
+  	  <a class="p-publisher h-card" href="<?= $response_site->url ?>" target="_blank"><?= $response_user->name ?></a>
+      <div class="p-summary p-name e-content">
+    	<?= $response->content ?>
+      </div>
+  	  <a class="u-url" href="<?= $response->canonical ?>"><time class="dt-published published" datetime="<?= $note->created_at ?>"><?= format_datetime('MONTH_DAY_YEAR_ABBR', $note->created_at) ?></time></a>
   	</div>
   	<div class="clear"></div>
   </div>
@@ -13,9 +16,9 @@
   
   <!-- Author -->
   <div id="note_creator" class="p-author author h-card vcard">
-  	<img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($note->user_id, $note->image, $note->gravatar, 'medium'); ?>">
+  	<a href="<?= base_url() ?>"><img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($note->user_id, $note->image, $note->gravatar, 'medium'); ?>"></a>
   	<div class="note_creator_info">
-  		<a href="<?= base_url().'people/'.$note->username ?>"><h2 class="p-name fn"><?= $note->name ?></h2></a>
+  		<a href="<?= base_url() ?>"><h2 class="p-name fn"><?= $note->name ?></h2></a>
   	  <a class="u-url" href="<?= base_url() ?>"><?php $pretty_url = explode('://', base_url()); echo trim($pretty_url[1], '/'); ?></a>
   	</div>
   </div>
@@ -24,7 +27,7 @@
   <div id="note" class="p-name entry-title p-summary summary e-content entry-content">
   	<?= item_linkify(nl2br($note->content), 'twitter') ?><br>
 		<a href="<?= base_url().'notes/'.$note->content_id ?>" class="u-url">
-		<?php if ($response): ?>Replied<?php else: ?>Posted<?php endif; ?> at
+		<?php if ($note->parent_id): ?>Replied<?php else: ?>Posted<?php endif; ?> at
 		<time class="dt-published published" datetime="<?= $note->created_at ?>"><?= format_datetime('MONTH_DAY_YEAR_ABBR', $note->created_at) ?></time> 
     </a>
     <?php if ($note->created_at != $note->updated_at): ?>
