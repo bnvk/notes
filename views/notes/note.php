@@ -68,3 +68,15 @@
   </div>
 
 </article>
+
+<script>
+$(document).ready(function(){
+    $(function(){
+        $.getJSON("https://webmention.io/api/count?jsonp=?", {
+            target: "<?= urlencode(base_url().'notes/'.$note->content_id) ?>"
+        }, function(data){
+            console.log(data.count);
+        });
+    });
+});
+</script>
