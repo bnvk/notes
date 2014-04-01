@@ -6,14 +6,14 @@
   	<div class="note_creator_info">    	
   	  <a class="p-publisher h-card" href="<?= $response_site->url ?>" target="_blank"><?= $response_user->name ?></a>
       <div class="p-summary p-name e-content">
-    	<?= $response->content ?>
+    	<?= item_linkify(nl2br($response->content), 'twitter') ?>
       </div>
-  	  <a class="u-url" href="<?= $response->canonical ?>"><time class="dt-published published" datetime="<?= $note->created_at ?>"><?= format_datetime('MONTH_DAY_YEAR_ABBR', $note->created_at) ?></time></a>
+  	  <a class="u-url" href="<?= $response->canonical ?>"><time class="dt-published published" datetime="<?= $response->created_at ?>"><?= format_datetime('MONTH_DAY_YEAR_ABBR', $response->created_at) ?></time></a>
   	</div>
   	<div class="clear"></div>
   </div>
   <?php endif; ?>
-  
+
   <!-- Author -->
   <div id="note_creator" class="p-author author h-card vcard">
   	<a href="<?= base_url() ?>"><img class="note_creator_avatar u-logo logo u-photo photo" src="<?= $this->social_igniter->profile_image($note->user_id, $note->image, $note->gravatar, 'medium'); ?>"></a>
@@ -40,6 +40,8 @@
   		<div class="note_attachment"><?= nl2br(str_replace(array('&lt;', '&gt;'), array('<', '>'), $extra->value)) ?></div>
   	<?php endif; endforeach; ?>
   </div>
+  
+  <div id="note_comments"><ul></ul></div>
   
   <div class="note_respond">
       <h4>Share &amp; Reply</h4>
@@ -76,10 +78,38 @@
 $(document).ready(function(){
     $(function(){
         $.getJSON("https://webmention.io/api/count?jsonp=?", {
-            target: "<?= urlencode(base_url().'notes/'.$note->content_id) ?>"
+            target: window.location.href
         }, function(data){
             console.log(data.count);
         });
     });
+    
+
+    var commentContainerSelector = '#note_comments ul';
+     
+    if($(commentContainerSelector).length > 0 && "WebSocket" in window) {
+      var ws = new WebSocket("ws://webmention.io:8080");
+      ws.onopen = function(event) {
+        // Send the current window URL to the server to register to receive notifications about this URL
+        ws.send(window.location);
+      };
+      ws.onmessage = function(event) {
+        var data = JSON.parse(event.data);
+    
+        if(data && data.type == "webmention") {
+          // Create a simple <li> element with the information from the post.
+          // Probably you will want to change the HTML generated here.
+          var comment = $('<li/>').html('<a href="'+data.author.url+'"><img src="'+data.author.photo+'" width="48"></a> <a href="'+data.author.url+'">'+data.author.name+'</a><br />'+data.content+'<br /><a href="'+data.url+'">'+data.published+'</a>');
+    
+          // Check if we've already added a comment for this ID, and update the existing one if so
+          if($("#"+data.element_id).length == 0) {
+            $(commentContainerSelector).append(comment);
+          } else {
+            $("#"+data.element_id+" li").html(comment);
+          }
+        }
+      };
+    }
+        
 });
 </script>
