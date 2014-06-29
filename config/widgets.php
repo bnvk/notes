@@ -18,7 +18,20 @@ $config['notes_widgets'][] = array(
 		'path'		=> 'widgets_recent_notes',
 		'multiple'	=> 'FALSE',
 		'order'		=> '1',
-		'title'		=> 'Notes',
+		'title'		=> 'Recent Notes',
+		'content'	=> ''
+	)
+);
+$config['notes_widgets'][] = array(
+	'regions'	=> array('content', 'wide'),
+	'widget'	=> array(
+		'module'	=> 'notes',
+		'name'		=> 'Share Note',
+		'method'	=> 'run',
+		'path'		=> 'widgets_share_note',
+		'multiple'	=> 'FALSE',
+		'order'		=> '2',
+		'title'		=> 'Share & Reply',
 		'content'	=> ''
 	)
 );

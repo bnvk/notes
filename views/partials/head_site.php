@@ -24,11 +24,16 @@ div.note_creator_info   { float: left; width: 510px; margin: 0px 0px 0px 25px; }
 #note .published,
 #note .updated          { margin-top: 5px; color: #999; font-size: 14px; line-height: 14px; font-style: italic; font-weight: normal; }
 
-#note_attachments       { margin: 35px 0; }
+#note_attachments       { width: 75%; margin: 35px 0 45px 0; }
 #note_attachments a     { font-size: 36px; line-height: 48px; }
 #note_attachments small { display: block; margin-top: 15px; }
 #note_attachments small a { font-size: 14px; line-height: 21px; }
-#note_attachments li    { font-size: 24px; line-height: 30px; }
+#note_attachments ol    { margin-left: 25px; list-style-position: inside; }
+#note_attachments ol li { list-style-type: decimal; list-style-position: inside; }
+#note_attachments p,
+#note_attachments li,
+#note_attachments li a,
+#note_attachments p a  { font-size: 21px; line-height: 24px; }
 
 
 div.note_attachment     { margin-bottom: 25px }

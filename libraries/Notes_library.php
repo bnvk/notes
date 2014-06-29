@@ -324,6 +324,14 @@ class Notes_library
 		{
 			$social_post_url = $content_data->url.$content_data->connection_username.'/posts/'.$content_data->value;
 		}
+		elseif ($content_data->module == 'diaspora')
+		{
+			$social_post_url = $content_data->url.'posts/'.$content_data->value;
+		}
+		elseif ($content_data->module == 'discourse')
+		{
+			$social_post_url = $content_data->url.$content_data->value;
+		}
 		else
 		{
 			$social_post_url = base_url(404);

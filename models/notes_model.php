@@ -12,7 +12,7 @@ class Notes_model extends CI_Model {
  		$this->db->select('*');
  		$this->db->from('content_meta');
  		$this->db->join('sites', 'sites.site_id = content_meta.site_id');		    
- 		$this->db->join('connections', 'connections.site_id = content_meta.site_id'); 
+ 		$this->db->join('connections', 'connections.site_id = content_meta.site_id', 'left'); 
  		$this->db->where('content_meta.content_id', $content_id);
  		$this->db->where('connections.user_id', $user_id);
  		$result = $this->db->get();	
